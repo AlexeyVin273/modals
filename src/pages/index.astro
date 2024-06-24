@@ -1,0 +1,19 @@
+---
+import Container from '@components/Container/Container'
+import MainLayout from '@layouts/Main/Main'
+import DropdownsList from '@components/DropdownsList/DropdownsList'
+import FocusModal from '@components/FocusModal/FocusModal'
+import Button from '@ui/Button/Button'
+---
+
+<MainLayout title="Главная">
+  <Container>
+    <h1>focus-lock samples</h1>
+    <DropdownsList />
+    <Button text="Модалка" modal="test-focus" mods={['fill']} />
+  </Container>
+
+  <Fragment slot="modals">
+    <FocusModal />
+  </Fragment>
+</MainLayout>
