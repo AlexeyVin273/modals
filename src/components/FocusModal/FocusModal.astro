@@ -1,0 +1,24 @@
+---
+import Modal from '@components/Modal/Modal'
+import Button from '@ui/Button/Button'
+---
+
+<Modal name="test-focus">
+  <h2>Test Focus</h2>
+  <div class="modal__form">
+    <form action="#">
+      <label for="input-1">Input 1</label>
+      <input type="text" id="input-1" />
+      <label for="input-2">Input 2</label>
+      <input type="text" id="input-2" disabled />
+      <label for="textarea-1">Textarea</label>
+      <textarea id="textarea-1"></textarea>
+      <select name="test-select" id="test-select">
+        <option value="1">Option 1</option>
+        <option value="2">Option 2</option>
+        <option value="3">Option 3</option>
+      </select>
+      <Button as="button" type="submit" text="Submit" />
+    </form>
+  </div>
+</Modal>
