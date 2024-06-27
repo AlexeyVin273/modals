@@ -4,16 +4,85 @@ import MainLayout from '@layouts/Main/Main'
 import DropdownsList from '@components/DropdownsList/DropdownsList'
 import FocusModal from '@components/FocusModal/FocusModal'
 import Button from '@ui/Button/Button'
+import Modal from '@components/Modal/Modal'
+import ButtonsList from '@components/ButtonsList/ButtonsList'
 ---
 
 <MainLayout title="Главная">
   <Container>
-    <h1>focus-lock samples</h1>
+    <h1>Примеры модальных окон</h1>
+    <ButtonsList
+      list={[
+        { text: 'Простая модалка', modal: 'simple-modal' },
+        { text: 'Модалка с коллбэками', modal: 'callbacks' },
+        { text: 'Модалка без фокуса', modal: 'no-focus' },
+        { text: 'Вложенные модалки', modal: 'stack-1' },
+        { text: 'Модалка с автовоспроизведением HTML5 video', modal: 'autoplay' },
+        { text: 'Модалка с автовоспроизведением iframe youtube', modal: 'autoplay-2' }
+      ]}
+    />
+    <h2>Примеры focus-lock</h2>
     <DropdownsList />
     <Button text="Модалка" modal="test-focus" mods={['fill']} />
   </Container>
 
   <Fragment slot="modals">
     <FocusModal />
+    <Modal name="simple-modal">
+      <h2>Модалка</h2>
+      <p>Пример простой модалки</p>
+      <Button text="Закрыть" mods={['fill']} data-close-modal />
+    </Modal>
+    <Modal name="callbacks">
+      <h2>Модалка</h2>
+      <p>Пример модалки с коллбэками</p>
+      <Button text="Закрыть" mods={['fill']} data-close-modal />
+    </Modal>
+    <Modal name="no-focus">
+      <h2>Модалка</h2>
+      <p>Пример модалки без фокуса</p>
+      <Button text="Закрыть" mods={['fill']} data-close-modal />
+    </Modal>
+    <Modal name="stack-1">
+      <h2>Стэк модалок уровень 1</h2>
+      <p>Пример вызова модалок из модалок</p>
+      <Button text="Стэк уровень 2" modal="stack-2" />
+      <Button text="Закрыть" mods={['fill']} data-close-modal />
+    </Modal>
+    <Modal name="stack-2">
+      <h2>Стэк модалок уровень 2</h2>
+      <p>Пример вызова модалок из модалок</p>
+      <Button text="Стэк уровень 3" modal="stack-3" />
+      <Button text="Вернуться к уровню 1" mods={['fill']} data-close-modal="back" />
+    </Modal>
+    <Modal name="stack-3">
+      <h2>Стэк модалок уровень 3</h2>
+      <p>Пример вызова модалок из модалок</p>
+      <Button text="Вернуться к уровню 2" mods={['fill']} data-close-modal="back" />
+    </Modal>
+    <Modal name="autoplay">
+      <h2>Пример с автовоспроизведением и автостопом</h2>
+      <div class="modal__iframe-video" data-auto-play>
+        <video controls loop>
+          <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4" />
+        </video>
+      </div>
+      <Button text="Закрыть" data-close-modal="back" />
+    </Modal>
+    <Modal name="autoplay-2">
+      <h2>Пример с автовоспроизведением и автостопом</h2>
+      <div class="modal__iframe-video" data-auto-play>
+        <iframe
+          width="1280"
+          height="720"
+          src="https://www.youtube.com/embed/aO3VXSa2RHA?enablejsapi=1"
+          title="Лесли Нильсен в Resident Evil 4"
+          allow="accelerometer; clipboard-write; autoplay; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen></iframe>
+        <!-- <iframe width="720" height="405" src="https://rutube.ru/play/embed/2601dc03be13d8c16b4be8b47bfff164?enablejsapi=1" allow="clipboard-write; autoplay"></iframe> -->
+      </div>
+      <Button text="Закрыть" data-close-modal="back" />
+    </Modal>
   </Fragment>
 </MainLayout>
