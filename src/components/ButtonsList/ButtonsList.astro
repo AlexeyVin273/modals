@@ -1,0 +1,23 @@
+---
+import Button from '@ui/Button/Button'
+
+export interface ButtonProps {
+  text: string
+  modal?: string
+  mods?: string[]
+}
+
+interface Props {
+  list: ButtonProps[]
+}
+
+const { list } = Astro.props
+---
+
+<ul class="buttons-list">
+  {list.map(({ text, modal, mods }) => (
+    <li class="buttons-list__item">
+      <Button text={text} modal={modal} mods={mods} />
+    </li>
+  ))}
+</ul>

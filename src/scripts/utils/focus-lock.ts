@@ -1,6 +1,9 @@
 let focusableElements: HTMLElement[] = []
 let focusedElement: HTMLElement = null
 
+/**
+ * An array of CSS selectors used to identify focusable elements.
+ */
 const selectors: string[] = [
   'a[href]',
   'area[href]',
@@ -40,7 +43,7 @@ function lockFocus(element: HTMLElement, startFocus: boolean = true): void {
     focusableElements[0].focus()
   }
 
-  document.addEventListener('keydown', keydownHandler)
+  document.addEventListener('keydown', trapFocus)
 }
 
 /**
@@ -54,10 +57,14 @@ function unlockFocus(returnFocus: boolean = true): void {
 
   focusedElement = null
   focusableElements = []
-  document.removeEventListener('keydown', keydownHandler)
+  document.removeEventListener('keydown', trapFocus)
 }
 
-function keydownHandler(event: KeyboardEvent): void {
+/**
+ * Handles the `keydown` event and moves the focus between the first and last focusable elements within the locked element
+ * @param { KeyboardEvent } event - The `keydown` event.
+ */
+function trapFocus(event: KeyboardEvent): void {
   let isTabPressed = event.key === 'Tab'
 
   if (!isTabPressed) {
